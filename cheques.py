@@ -42,8 +42,14 @@ def main():
                 # Convertir 'fecha' a formato datetime DESPUÉS del merge
                 df['fecha'] = pd.to_datetime(df['fecha'], format='%m/%Y')
 
+                # Crear un rango de los últimos 24 meses
+                max_month = df['fecha'].max()
+                min_month = max_month - pd.DateOffset(months=23)
+                all_months = pd.date_range(start=min_month, end=max_month, freq='M').to_period('M')
+
                 # Agrupar por mes y sumar los valores ajustados
                 df_grouped = df.groupby(df['fecha'].dt.to_period('M')).sum()
+                df_grouped = df_grouped.reindex(all_months, fill_value=0)
 
                 # Crear gráfico de barras con seaborn
                 plt.figure(figsize=(10, 6))
