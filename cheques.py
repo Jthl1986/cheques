@@ -48,7 +48,7 @@ def main():
                 all_months = pd.date_range(start=min_month, end=max_month, freq='M').to_period('M')
 
                 # Agrupar por mes y sumar los valores ajustados
-                df_grouped = df.groupby(df['fecha'].dt.to_period('M')).sum()
+                df_grouped = df.groupby(df['fecha'].dt.to_period('M')).sum(numeric_only=True)
                 df_grouped = df_grouped.reindex(all_months, fill_value=0)
 
                 # Crear gráfico de barras con seaborn
