@@ -63,7 +63,12 @@ def main():
                 plt.title('Montos descontados por mes', fontsize=15)
                 plt.xticks(rotation=90, ha='right')
                 plt.grid(True, axis='y')  # Mostrar líneas de la cuadrícula en el eje y
-                plt.ylim(0, df_grouped['ajustado'].max() * 1.1)  # Ajustar límite superior del eje y
+                plt.ylim(0, df_grouped['ajustado'].max() * 1.1)  # Ajustar límite superior del eje 
+                
+                # Ajustar límite superior del eje y si el máximo no es 0
+                max_value = df_grouped['ajustado'].max()
+                if max_value > 0:
+                    plt.ylim(0, max_value * 1.1)
 
                 # Añadir etiquetas de valor en cada barra
                 for index, value in enumerate(df_grouped['ajustado']):
