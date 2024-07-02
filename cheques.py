@@ -45,7 +45,7 @@ def main():
                 # Crear un rango de los últimos 24 meses desde el mes actual
                 today = pd.to_datetime('today')
                 end_date = today.to_period('M')
-                start_date = (end_date - 22).to_timestamp()
+                start_date = (end_date - 23).to_timestamp()
 
                 all_months = pd.date_range(start=start_date, end=end_date.to_timestamp(), freq='M').to_period('M')
 
