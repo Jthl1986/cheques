@@ -5,7 +5,7 @@ import seaborn as sns
 
 st.set_page_config(page_title="Evolución descuento de cheques",page_icon="💴")
 
-url = "https://raw.githubusercontent.com/Jthl1986/T1/main/iipc3.csv"
+url = "https://raw.githubusercontent.com/Jthl1986/T1/main/iipc2.csv"
 df1 = pd.read_csv(url, encoding='ISO-8859-1', sep=',')
 
 #OCULTAR FUENTE GITHUB
@@ -55,7 +55,7 @@ def main():
 
                 # Crear gráfico de barras con seaborn
                 plt.figure(figsize=(10, 6))
-                sns.barplot(x=df_grouped.index.strftime('%B %Y'), y=df_grouped['ajustado'], palette="viridis", hue=df_grouped.index.strftime('%B %Y'), dodge=False, legend=False)
+                sns.barplot(x=df_grouped.index.strftime('%B %Y'), y=df_grouped['ajustado'], palette="viridis")
 
                 # Personalizar el gráfico
                 plt.xlabel('Meses', fontsize=12)
@@ -63,12 +63,7 @@ def main():
                 plt.title('Montos descontados por mes', fontsize=15)
                 plt.xticks(rotation=90, ha='right')
                 plt.grid(True, axis='y')  # Mostrar líneas de la cuadrícula en el eje y
-                plt.ylim(0, df_grouped['ajustado'].max() * 1.1)  # Ajustar límite superior del eje 
-                
-                # Ajustar límite superior del eje y si el máximo no es 0
-                max_value = df_grouped['ajustado'].max()
-                if max_value > 0:
-                    plt.ylim(0, max_value * 1.1)
+                plt.ylim(0, df_grouped['ajustado'].max() * 1.1)  # Ajustar límite superior del eje y
 
                 # Añadir etiquetas de valor en cada barra
                 for index, value in enumerate(df_grouped['ajustado']):
