@@ -55,7 +55,7 @@ def main():
 
                 # Crear gráfico de barras con seaborn
                 plt.figure(figsize=(10, 6))
-                sns.barplot(x=df_grouped.index.strftime('%B %Y'), y=df_grouped['ajustado'], palette="viridis")
+                sns.barplot(x=df_grouped.index.strftime('%B %Y'), y=df_grouped['ajustado'], palette="viridis", hue=df_grouped.index.strftime('%B %Y'), dodge=False, legend=False)
 
                 # Personalizar el gráfico
                 plt.xlabel('Meses', fontsize=12)
