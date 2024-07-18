@@ -60,7 +60,7 @@ def main():
                 # Personalizar el gráfico
                 plt.xlabel('Meses', fontsize=12)
                 plt.ylabel('Totales Ajustados ($)', fontsize=12)  # Añadir la unidad monetaria si aplica
-                plt.title('Montos descontados por mes', fontsize=15)
+                plt.title('Montos descontados por mes en valores constantes', fontsize=15)
                 plt.xticks(rotation=90, ha='right')
                 plt.grid(True, axis='y')  # Mostrar líneas de la cuadrícula en el eje y
                 plt.ylim(0, df_grouped['ajustado'].max() * 1.1)  # Ajustar límite superior del eje y
