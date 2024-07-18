@@ -7,7 +7,7 @@ st.set_page_config(page_title="Evolución descuento de cheques",page_icon="💴"
 
 url = "https://raw.githubusercontent.com/Jthl1986/T1/main/iipc4.csv"
 df1 = pd.read_csv(url, encoding='ISO-8859-1', sep=',')
-
+#
 #OCULTAR FUENTE GITHUB
 hide_github_link = """
 <style>
