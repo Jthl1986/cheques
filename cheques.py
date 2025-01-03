@@ -72,6 +72,25 @@ def main():
                 # Mostrar el gráfico en Streamlit
                 st.pyplot()
 
+                # Crear gráfico de barras con seaborn para valores históricos
+                plt.figure(figsize=(10, 6))
+                sns.barplot(x=df_grouped.index.strftime('%B %Y'), y=df_grouped['Monto Liquidado'], palette="viridis")
+
+                # Personalizar el gráfico
+                plt.xlabel('Meses', fontsize=12)
+                plt.ylabel('Totales Históricos ($)', fontsize=12)  # Añadir la unidad monetaria si aplica
+                plt.title('Montos descontados por mes en valores históricos', fontsize=15)
+                plt.xticks(rotation=90, ha='right')
+                plt.grid(True, axis='y')  # Mostrar líneas de la cuadrícula en el eje y
+                plt.ylim(0, df_grouped['Monto Liquidado'].max() * 1.1)  # Ajustar límite superior del eje y
+
+                # Añadir etiquetas de valor en cada barra
+                for index, value in enumerate(df_grouped['Monto Liquidado']):
+                    plt.text(index, value + 10, f'{value:,}', ha='center', va='bottom', fontsize=10)
+
+                # Mostrar el gráfico en Streamlit
+                st.pyplot()
+
                 with st.expander("Tabla de control"):
                     # Seleccionar columnas a mostrar
                     df['ajustado'] = df['ajustado'].astype(int)
