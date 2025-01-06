@@ -63,14 +63,14 @@ def main():
                 # Personalizar el gráfico
                 plt.xlabel('Meses', fontsize=12)
                 plt.ylabel('Totales Ajustados (MM$)', fontsize=12)  # Indicar que las unidades están en millones
-                plt.title('Montos descontados por mes en valores constantes', fontsize=15)
+                plt.title('Montos descontados por mes en valores constantes (en millones)', fontsize=15)
                 plt.xticks(rotation=90, ha='right')
                 plt.grid(True, axis='y')  # Mostrar líneas de la cuadrícula en el eje y
                 plt.ylim(0, df_grouped['ajustado_mm'].max() * 1.1)  # Ajustar límite superior del eje y
 
                 # Añadir etiquetas de valor en cada barra
                 for index, value in enumerate(df_grouped['ajustado_mm']):
-                    plt.text(index, value + 0.1, f'{value:,.2f}MM', ha='center', va='bottom', fontsize=10)
+                    plt.text(index, value + 0.1, f'{value:,.0f}', ha='center', va='bottom', fontsize=10)
 
                 # Mostrar el gráfico en Streamlit
                 st.pyplot()
