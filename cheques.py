@@ -55,6 +55,7 @@ def main():
 
                 # Crear nueva columna para los valores ajustados en millones
                 df_grouped['ajustado_mm'] = df_grouped['ajustado'] / 1_000_000
+                df_grouped['historico_mm'] = df_grouped['Monto Liquidado'] / 1_000_000
 
                 # Crear gráfico de barras con seaborn
                 plt.figure(figsize=(10, 6))
@@ -77,18 +78,18 @@ def main():
 
                 # Crear gráfico de barras con seaborn para valores históricos
                 plt.figure(figsize=(10, 6))
-                sns.barplot(x=df_grouped.index.strftime('%B %Y'), y=df_grouped['Monto Liquidado'], palette="viridis")
+                sns.barplot(x=df_grouped.index.strftime('%B %Y'), y=df_grouped['historico_mm'], palette="viridis")
 
                 # Personalizar el gráfico
                 plt.xlabel('Meses', fontsize=12)
-                plt.ylabel('Totales Históricos ($)', fontsize=12)  # Añadir la unidad monetaria si aplica
-                plt.title('Montos descontados por mes en valores históricos', fontsize=15)
+                plt.ylabel('Totales Históricos (MM$)', fontsize=12)  # Añadir la unidad monetaria si aplica
+                plt.title('Montos descontados por mes en valores históricos (en millones)', fontsize=15)
                 plt.xticks(rotation=90, ha='right')
                 plt.grid(True, axis='y')  # Mostrar líneas de la cuadrícula en el eje y
-                plt.ylim(0, df_grouped['Monto Liquidado'].max() * 1.1)  # Ajustar límite superior del eje y
+                plt.ylim(0, df_grouped['historico_mm'].max() * 1.1)  # Ajustar límite superior del eje y
 
                 # Añadir etiquetas de valor en cada barra
-                for index, value in enumerate(df_grouped['Monto Liquidado']):
+                for index, value in enumerate(df_grouped['historico_mm']):
                     plt.text(index, value + 10, f'{value:,}', ha='center', va='bottom', fontsize=10)
 
                 # Mostrar el gráfico en Streamlit
