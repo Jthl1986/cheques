@@ -90,7 +90,7 @@ def main():
 
                 # Añadir etiquetas de valor en cada barra
                 for index, value in enumerate(df_grouped['historico_mm']):
-                    plt.text(index, value + 10, f'{value:,.0f}', ha='center', va='bottom', fontsize=10)
+                    plt.text(index, value + 0.1, f'{value:,.0f}', ha='center', va='bottom', fontsize=10)
 
                 # Mostrar el gráfico en Streamlit
                 st.pyplot()
