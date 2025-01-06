@@ -33,10 +33,10 @@ def main():
                 df0 = df0[[4, 16]]
                 df0.columns = ['Fecha1', 'Monto Liquidado']
                 df0['fecha'] = df0['Fecha1'].str[5:7] + '/' + df0['Fecha1'].str[:4]
-                df= pd.merge(df0, df1, on='fecha', how='inner')
+                df = pd.merge(df0, df1, on='fecha', how='inner')
                 df['Monto Liquidado'] = df['Monto Liquidado'].replace('[\$,]', '', regex=True)  # Eliminar símbolos de moneda y comas
                 df['Monto Liquidado'] = pd.to_numeric(df['Monto Liquidado'], errors='coerce').fillna(0).astype(int)
-                df['ajustado'] = df['Monto Liquidado']*df['iipc']
+                df['ajustado'] = df['Monto Liquidado'] * df['iipc']
                 df['ajustado'] = df['ajustado'].astype(int)
 
                 # Convertir 'fecha' a formato datetime DESPUÉS del merge
@@ -53,21 +53,24 @@ def main():
                 df_grouped = df.groupby(df['fecha'].dt.to_period('M')).sum(numeric_only=True)
                 df_grouped = df_grouped.reindex(all_months, fill_value=0)
 
+                # Crear nueva columna para los valores ajustados en millones
+                df_grouped['ajustado_mm'] = df_grouped['ajustado'] / 1_000_000
+
                 # Crear gráfico de barras con seaborn
                 plt.figure(figsize=(10, 6))
-                sns.barplot(x=df_grouped.index.strftime('%B %Y'), y=df_grouped['ajustado'], palette="viridis")
+                sns.barplot(x=df_grouped.index.strftime('%B %Y'), y=df_grouped['ajustado_mm'], palette="viridis")
 
                 # Personalizar el gráfico
                 plt.xlabel('Meses', fontsize=12)
-                plt.ylabel('Totales Ajustados ($)', fontsize=12)  # Añadir la unidad monetaria si aplica
+                plt.ylabel('Totales Ajustados (MM$)', fontsize=12)  # Indicar que las unidades están en millones
                 plt.title('Montos descontados por mes en valores constantes', fontsize=15)
                 plt.xticks(rotation=90, ha='right')
                 plt.grid(True, axis='y')  # Mostrar líneas de la cuadrícula en el eje y
-                plt.ylim(0, df_grouped['ajustado'].max() * 1.1)  # Ajustar límite superior del eje y
+                plt.ylim(0, df_grouped['ajustado_mm'].max() * 1.1)  # Ajustar límite superior del eje y
 
                 # Añadir etiquetas de valor en cada barra
-                for index, value in enumerate(df_grouped['ajustado']):
-                    plt.text(index, value + 10, f'{value:,}', ha='center', va='bottom', fontsize=10)
+                for index, value in enumerate(df_grouped['ajustado_mm']):
+                    plt.text(index, value + 0.1, f'{value:,.2f}MM', ha='center', va='bottom', fontsize=10)
 
                 # Mostrar el gráfico en Streamlit
                 st.pyplot()
