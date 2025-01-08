@@ -11,6 +11,19 @@ df1 = pd.read_csv(url, encoding='ISO-8859-1', sep=',')
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
+hide_streamlit_style = """
+    <style>
+    /* Ocultar el botón de Share */
+    .stApp header [data-testid="stHeader"] { 
+        display: none; 
+    }
+    /* Opcional: Ocultar la barra de menú de Streamlit (incluye acceso al GitHub si está visible) */
+    footer {visibility: hidden;}
+    .css-1lsmgbg.egzxvld1 {visibility: hidden;}
+    </style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
 def main():
     st.title("📊 Evolución descuento de cheques")
 
