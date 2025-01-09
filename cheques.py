@@ -108,7 +108,7 @@ def main():
 
     if uploaded_file2:
             try:
-                acreditados_df = pd.read_csv(uploaded_file2, header=None, encoding='utf-8')
+                acreditados_df = pd.read_csv(uploaded_file2, header=None)
                 acreditados_df = acreditados_df.iloc[:-2]
                 acreditados_df = acreditados_df.drop(acreditados_df.columns[[0, 1, 2, 3, 5, 7, 8, 9, 14]], axis=1)
                 acreditados_df[['condicion', 'monto']] = acreditados_df.iloc[:, 5].str.split(":", expand=True)
