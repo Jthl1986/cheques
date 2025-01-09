@@ -146,7 +146,7 @@ def main():
                 # Unir este conteo con el DataFrame final
                 resultado_final = pd.merge(resultado_final, cantidad_cheques, on='mes_anio_acred', how='left')
                 promedio_diferencia_df = promedio_diferencia.reset_index()
-                #promedio_diferencia_df = promedio_diferencia_df.iloc[:-1]
+                promedio_diferencia_df = promedio_diferencia_df.iloc[:-1]
                 promedio_diferencia_df.columns = ['mes_anio_acred', 'promedio_diferencia_dias']
 
                 def graficadol(resultado_final):
