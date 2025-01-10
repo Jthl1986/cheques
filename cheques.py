@@ -35,7 +35,7 @@ def main():
     if uploaded_file:
             try:
                 # Leer el archivo CSV sin encabezados
-                df9 = pd.read_csv(uploaded_file, header=None)
+                df9 = pd.read_csv(uploaded_file, header=None, encoding='latin1')
 
                 # Seleccionar las columnas de interés
                 df0 = df9[[4, 16]]
