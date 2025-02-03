@@ -196,6 +196,7 @@ def main():
             resultado_final['coeficiente_variacion'] = (resultado_final['desviacion_estandar_dias'] / resultado_final['promedio_diferencia_dias']) * 100
 
             # Generar gráfico
+            st.subheader("Cheques acreditados")
             graficadol(resultado_final)
 
             # Tabla de top 5 firmantes
