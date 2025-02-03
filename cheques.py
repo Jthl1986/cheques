@@ -108,6 +108,7 @@ def main():
     uploaded_file2 = st.file_uploader("Sube archivo CSV - Acreditados - valoresAcreditados", type=["csv"])
     st.markdown("<small>Desarrollado por JSantacecilia - JSaborido - Equipo Agro</small>", unsafe_allow_html=True)
     
+    st.subheader("Cheques descontados")
     df9 = None  # Inicializar df9 fuera de los bloques condicionales
 
     # Procesar primer gráfico (solo descontados)
