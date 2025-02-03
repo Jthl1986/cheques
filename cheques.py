@@ -216,9 +216,11 @@ def main():
                 column_order=("firmante", "cantidad_cheques", "monto_total", "promedio_diferencia_dias"),
                 use_container_width=True
             )
+            resultado_df
 
         except Exception as e:
             st.error(f"Error al procesar los archivos: {e}")
+
 
 if __name__ == "__main__":
     main()
