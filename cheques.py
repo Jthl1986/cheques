@@ -8,6 +8,8 @@ import numpy as np  # Importar numpy para manejar NaN
 url = "https://raw.githubusercontent.com/Jthl1986/T1/main/iipcDec24vf.csv"
 df1 = pd.read_csv(url, encoding='ISO-8859-1', sep=',')
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
 def graficadol(resultado_final):
     # Función para formatear los números grandes en millones
     def millions(x, pos):
@@ -201,23 +203,37 @@ def main():
             graficadol(resultado_final)
 
             # Tabla de top 5 firmantes
-            top_firmantes = resultado_df.groupby('firmante').agg(
+            grouped_firmantes = resultado_df.groupby('firmante').agg(
                 cantidad_cheques=('id', 'size'),
                 monto_total=('monto', 'sum'),
                 promedio_diferencia_dias=('diferencia_dias', 'mean')
-            ).reset_index().sort_values('cantidad_cheques', ascending=False).head(5)
+            ).reset_index()
 
-            # Formatear montos
-            top_firmantes['monto_total'] = top_firmantes['monto_total'].apply(lambda x: f'${x:,.0f}')
-            top_firmantes['promedio_diferencia_dias'] = top_firmantes['promedio_diferencia_dias'].round(1)
+            # Top por Cantidad de Cheques
+            top_cantidad = grouped_firmantes.sort_values('cantidad_cheques', ascending=False).head(5)
+            top_cantidad['monto_total'] = top_cantidad['monto_total'].apply(lambda x: f'${x:,.0f}')
+            top_cantidad['promedio_diferencia_dias'] = top_cantidad['promedio_diferencia_dias'].round(1)
 
-            # Mostrar tabla
+            # Top por Monto Total
+            top_monto = grouped_firmantes.sort_values('monto_total', ascending=False).head(5)
+            top_monto['monto_total'] = top_monto['monto_total'].apply(lambda x: f'${x:,.0f}')
+            top_monto['promedio_diferencia_dias'] = top_monto['promedio_diferencia_dias'].round(1)
+
+            # Mostrar ambas tablas
             st.subheader("Top 5 Firmantes por Cantidad de Cheques")
             st.dataframe(
-                top_firmantes,
+                top_cantidad,
                 column_order=("firmante", "cantidad_cheques", "monto_total", "promedio_diferencia_dias"),
                 use_container_width=True
             )
+
+            st.subheader("Top 5 Firmantes por Monto Total")
+            st.dataframe(
+                top_monto,
+                column_order=("firmante", "cantidad_cheques", "monto_total", "promedio_diferencia_dias"),
+                use_container_width=True
+            )
+
             with st.expander("Ver detalle operaciones"):
                 st.dataframe(resultado_df)
 
