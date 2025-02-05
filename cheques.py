@@ -189,18 +189,16 @@ def main():
             ).reset_index()
 
             # Mostrar tops
-            col1, col2 = st.columns(2)
-            with col1:
-                st.subheader("Top 5 por Cantidad")
-                top_cantidad = top_firmantes.sort_values('cantidad_cheques', ascending=False).head(5)
-                top_cantidad['monto_total_ajustado'] = top_cantidad['monto_total_ajustado'].apply(lambda x: f'${x:,.0f}')
-                st.dataframe(top_cantidad[['firmante', 'cantidad_cheques', 'monto_total_ajustado', 'promedio_diferencia_dias']])
+            
+            st.subheader("Top 5 por Cantidad")
+            top_cantidad = top_firmantes.sort_values('cantidad_cheques', ascending=False).head(5)
+            top_cantidad['monto_total_ajustado'] = top_cantidad['monto_total_ajustado'].apply(lambda x: f'${x:,.0f}')
+            st.dataframe(top_cantidad[['firmante', 'cantidad_cheques', 'monto_total_ajustado', 'promedio_diferencia_dias']])
 
-            with col2:
-                st.subheader("Top 5 por Monto Ajustado")
-                top_monto = top_firmantes.sort_values('monto_total_ajustado', ascending=False).head(5)
-                top_monto['monto_total_ajustado'] = top_monto['monto_total_ajustado'].apply(lambda x: f'${x:,.0f}')
-                st.dataframe(top_monto[['firmante', 'cantidad_cheques', 'monto_total_ajustado','promedio_diferencia_dias']])
+            st.subheader("Top 5 por Monto Ajustado")
+            top_monto = top_firmantes.sort_values('monto_total_ajustado', ascending=False).head(5)
+            top_monto['monto_total_ajustado'] = top_monto['monto_total_ajustado'].apply(lambda x: f'${x:,.0f}')
+            st.dataframe(top_monto[['firmante', 'cantidad_cheques', 'monto_total_ajustado','promedio_diferencia_dias']])
 
             # Gráfico de análisis por firmante
             st.subheader("Análisis Temporal por Firmante")
