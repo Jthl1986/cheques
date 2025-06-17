@@ -6,7 +6,7 @@ from datetime import datetime
 import numpy as np
 
 # Cargar datos de IIPC
-url = "https://raw.githubusercontent.com/Jthl1986/T1/main/iipcAbr25.csv"
+url = "https://raw.githubusercontent.com/Jthl1986/T1/main/iipcMay25.csv"
 df1 = pd.read_csv(url, encoding='ISO-8859-1', sep=',')
 
 # Configuración de Streamlit
