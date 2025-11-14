@@ -178,8 +178,8 @@ def main():
             ).reset_index()
             resultado_final['coeficiente_variacion'] = (resultado_final['desviacion_estandar_dias'] / 
                                                       resultado_final['promedio_diferencia_dias']) * 100
-            st.subheader("Cheques acreditados")
-            graficadol(resultado_final)
+            #st.subheader("Cheques acreditados")
+            #graficadol(resultado_final)
 
             # Top 5 Firmantes con valores ajustados
             top_firmantes = resultado_df.groupby('firmante').agg(
