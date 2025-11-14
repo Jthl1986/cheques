@@ -202,11 +202,11 @@ def main():
 
             # Gráfico de análisis por firmante
             #st.subheader("Análisis Temporal por Firmante")
-            selected_firmante = st.selectbox(
-                "Seleccionar firmante del Top 5:",
-                options=top_monto['firmante'].tolist(),
-                key="firmante_selector"
-            )
+            #selected_firmante = st.selectbox(
+            #    "Seleccionar firmante del Top 5:",
+            #    options=top_monto['firmante'].tolist(),
+            #    key="firmante_selector"
+            #)
             
             if selected_firmante:
                 df_filtrado = resultado_df[
