@@ -244,7 +244,7 @@ def main():
                     
                     #st.pyplot(plt)
                 else:
-                    #st.warning("No hay datos suficientes para generar el gráfico temporal")
+                    st.warning("No hay datos suficientes para generar el gráfico temporal")
 
             with st.expander("Ver detalle completo de operaciones"):
                 st.dataframe(resultado_df)
