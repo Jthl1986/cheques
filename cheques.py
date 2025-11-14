@@ -178,8 +178,8 @@ def main():
             ).reset_index()
             resultado_final['coeficiente_variacion'] = (resultado_final['desviacion_estandar_dias'] / 
                                                       resultado_final['promedio_diferencia_dias']) * 100
-            #st.subheader("Cheques acreditados")
-            #graficadol(resultado_final)
+            #st.subheader("Cheques acreditados") SACAR COMENTARIO PARA ACTIVAR
+            #graficadol(resultado_final) SACAR COMENTARIO PARA ACTIVAR
 
             # Top 5 Firmantes con valores ajustados
             top_firmantes = resultado_df.groupby('firmante').agg(
@@ -201,7 +201,7 @@ def main():
             st.dataframe(top_monto[['firmante', 'cantidad_cheques', 'monto_total_ajustado','promedio_diferencia_dias']])
 
             # Gráfico de análisis por firmante
-            st.subheader("Análisis Temporal por Firmante")
+            #st.subheader("Análisis Temporal por Firmante")
             selected_firmante = st.selectbox(
                 "Seleccionar firmante del Top 5:",
                 options=top_monto['firmante'].tolist(),
@@ -242,9 +242,9 @@ def main():
                     for x, y in zip(df_evolucion['fecha'], df_evolucion['diferencia_dias']):
                         plt.text(x, y + 0.5, f'{y:.1f}', ha='center', va='bottom')
                     
-                    st.pyplot(plt)
+                    #st.pyplot(plt)
                 else:
-                    st.warning("No hay datos suficientes para generar el gráfico temporal")
+                    #st.warning("No hay datos suficientes para generar el gráfico temporal")
 
             with st.expander("Ver detalle completo de operaciones"):
                 st.dataframe(resultado_df)
