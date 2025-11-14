@@ -208,43 +208,43 @@ def main():
             #    key="firmante_selector"
             #)
             
-            if selected_firmante:
-                df_filtrado = resultado_df[
-                    (resultado_df['firmante'] == selected_firmante) &
-                    (resultado_df['diferencia_dias'].notna())
-                ]
+            #if selected_firmante:
+            #    df_filtrado = resultado_df[
+            #        (resultado_df['firmante'] == selected_firmante) &
+            #        (resultado_df['diferencia_dias'].notna())
+            #    ]
                 
-                if not df_filtrado.empty:
-                    df_evolucion = df_filtrado.groupby(
-                        df_filtrado['fecha_acreditacion'].dt.to_period('M')
-                    )['diferencia_dias'].mean().reset_index()
+            #    if not df_filtrado.empty:
+            #        df_evolucion = df_filtrado.groupby(
+            #            df_filtrado['fecha_acreditacion'].dt.to_period('M')
+            #        )['diferencia_dias'].mean().reset_index()
                     
-                    df_evolucion['fecha'] = df_evolucion['fecha_acreditacion'].dt.to_timestamp()
+            #        df_evolucion['fecha'] = df_evolucion['fecha_acreditacion'].dt.to_timestamp()
                     
-                    plt.figure(figsize=(12, 6))
-                    sns.lineplot(
-                        data=df_evolucion,
-                        x='fecha',
-                        y='diferencia_dias',
-                        marker='o',
-                        linewidth=2,
-                        color='darkblue'
-                    )
+            #        plt.figure(figsize=(12, 6))
+            #        sns.lineplot(
+            #            data=df_evolucion,
+            #            x='fecha',
+            #            y='diferencia_dias',
+            #            marker='o',
+            #            linewidth=2,
+            #            color='darkblue'
+            #        )
                     
-                    plt.title(f'Evolución Mensual de Plazos de Acreditación - {selected_firmante}')
-                    plt.xlabel('Mes')
-                    plt.ylabel('Días Promedio')
-                    plt.xticks(rotation=45)
-                    plt.grid(True, alpha=0.3)
-                    plt.gca().xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter('%b-%Y'))
+            #       plt.title(f'Evolución Mensual de Plazos de Acreditación - {selected_firmante}')
+            #       plt.xlabel('Mes')
+            #       plt.ylabel('Días Promedio')
+            #       plt.xticks(rotation=45)
+            #       plt.grid(True, alpha=0.3)
+            #       plt.gca().xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter('%b-%Y'))
                     
                     # Añadir etiquetas de valores
-                    for x, y in zip(df_evolucion['fecha'], df_evolucion['diferencia_dias']):
-                        plt.text(x, y + 0.5, f'{y:.1f}', ha='center', va='bottom')
+            #       for x, y in zip(df_evolucion['fecha'], df_evolucion['diferencia_dias']):
+            #           plt.text(x, y + 0.5, f'{y:.1f}', ha='center', va='bottom')
                     
                     #st.pyplot(plt)
-                else:
-                    st.warning("No hay datos suficientes para generar el gráfico temporal")
+            #   else:
+            #       st.warning("No hay datos suficientes para generar el gráfico temporal")
 
             with st.expander("Ver detalle completo de operaciones"):
                 st.dataframe(resultado_df)
