@@ -193,21 +193,21 @@ def main():
             
             st.subheader("Top 5 por Cantidad")
             top_cantidad = top_firmantes.sort_values('cantidad_cheques', ascending=False).head(5)
-            top_cantidad['monto_total'] = top_cantidad['monto_total'].apply(lambda x: f'${x:,.0f}')
-            top_cantidad['monto_total_ajustado'] = top_cantidad['monto_total_ajustado'].apply(lambda x: f'${x:,.0f}')
-            st.dataframe(
-                top_cantidad[['firmante', 'cantidad_cheques', 'monto_total', 'monto_total_ajustado', 'promedio_diferencia_dias']], 
-                use_container_width=True
-            )
+            top_cantidad_display = top_cantidad.copy()
+            top_cantidad_display['monto_total'] = top_cantidad_display['monto_total'].apply(lambda x: f'${x:,.0f}')
+            top_cantidad_display['monto_total_ajustado'] = top_cantidad_display['monto_total_ajustado'].apply(lambda x: f'${x:,.0f}')
+            top_cantidad_display = top_cantidad_display[['firmante', 'cantidad_cheques', 'monto_total', 'monto_total_ajustado', 'promedio_diferencia_dias']]
+            top_cantidad_display.columns = ['Firmante', 'Cantidad', 'Monto Total', 'Monto Ajustado', 'Días Promedio']
+            st.markdown(top_cantidad_display.to_html(index=False, escape=False), unsafe_allow_html=True)
 
             st.subheader("Top 5 por Monto Ajustado")
             top_monto = top_firmantes.sort_values('monto_total_ajustado', ascending=False).head(5)
-            top_monto['monto_total'] = top_monto['monto_total'].apply(lambda x: f'${x:,.0f}')
-            top_monto['monto_total_ajustado'] = top_monto['monto_total_ajustado'].apply(lambda x: f'${x:,.0f}')
-            st.dataframe(
-                top_monto[['firmante', 'cantidad_cheques', 'monto_total', 'monto_total_ajustado', 'promedio_diferencia_dias']], 
-                use_container_width=True
-            )
+            top_monto_display = top_monto.copy()
+            top_monto_display['monto_total'] = top_monto_display['monto_total'].apply(lambda x: f'${x:,.0f}')
+            top_monto_display['monto_total_ajustado'] = top_monto_display['monto_total_ajustado'].apply(lambda x: f'${x:,.0f}')
+            top_monto_display = top_monto_display[['firmante', 'cantidad_cheques', 'monto_total', 'monto_total_ajustado', 'promedio_diferencia_dias']]
+            top_monto_display.columns = ['Firmante', 'Cantidad', 'Monto Total', 'Monto Ajustado', 'Días Promedio']
+            st.markdown(top_monto_display.to_html(index=False, escape=False), unsafe_allow_html=True)
 
             # Gráfico de análisis por firmante
             #st.subheader("Análisis Temporal por Firmante")
